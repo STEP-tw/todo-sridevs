@@ -1,6 +1,6 @@
 let fs = require('fs');
 let prependFile = require('prepend-file');
-let registered_users = [{userName:'dev',name:'sridevs'},{userName:'harshab',name:'Harsha Vardhana'}];
+let registered_users = [{userName:'dev',name:'sridevs'}];
 let setContentType = function (fileName) {
   let headers = {
     js: {'Content-Type': 'text/javascript'},
@@ -21,14 +21,7 @@ let setContentType = function (fileName) {
 
 let getFileName = function (request) {
   let fileName = request.url.substr(1)
-  if ( fileName === 'data/comments.txt') {
-    return fileName;
-  }
-  return './public/' + (fileName || 'home.html');
-};
-
-let isItComments = function (fileName,request) {
-  return fileName === './public/comments' && request.method === 'POST';
+  return './public/' + (fileName || 'loginPage.html');
 };
 
 let replaceEqualsWithColon = function (string) {
@@ -46,61 +39,14 @@ let getTime = function () {
   return joinStrings(humanReadableDate,humanReadableTime);
 };
 
-let refineComments = function (comments) {
-  comments = comments.replace(/\+/g,' ');
-  refinedComments = decodeURIComponent(comments);
-  return refinedComments;
-};
-
-let recordComments = function (comments) {
-  let refinedComments = refineComments(comments);
-  let time = getTime();
-  let commentsToRecord = joinStrings(time,refinedComments) + '\n';
-  prependFile('./data/comments.txt',commentsToRecord);
-};
-
-let handleComments = function (fileName,request,response) {
-  let user = registered_users.find(u=>u.userName==request.body.userName);
-  let name = `Name: ${request.body.Name}`;
-  let comment = `Comment: ${request.body.Comment}`;
-  let commentsData = joinStrings(name,comment);
-  recordComments(commentsData);
-
-  response.writeHead('302',{'location': 'guestPage.html'});
-
-  response.end();
-};
-
 let handleRequests = function (request, response) {
   // Read the requested file content from file system
   let fileName = getFileName(request);
-
   // Print the name of the file for which request is made.
   console.log("Request for " + fileName + " received.");
-
-  fs.readFile(fileName, function (err, data) {
-    if (isItComments(fileName,request)) {
-      handleComments(fileName,request,response);
-      return ;
-    }
-
-    if (err) {
-      console.log(err);
-      // page not found
-      // HTTP Status: 404 : NOT FOUND
-      response.writeHead(404,setContentType(fileName));
-    }else {
-      //Page found
-      // HTTP Status: 200 : OK
-      response.writeHead(200,setContentType(fileName));
-      // Write the content of the file to response body
-      response.write(data);
-      // response.write(data);
-
-    }
-    // Send the response body
-    response.end();
-  });
+  let data = fs.readFileSync(fileName);
+  response.write(data);
+  response.end();
 }
 
 exports.handleRequests = handleRequests;

@@ -1,6 +1,7 @@
 const timeStamp = require('./time.js').timeStamp;
 const WebApp = require('./webapp');
 const fs = require('fs');
+const handleRequests = require('./serverLib.js').handleRequests;
 let registered_users = [{userName:'dev',name:'sridevs'}];
 let toS = o=>JSON.stringify(o,null,2);
 /*============================================================================*/
@@ -22,9 +23,26 @@ let loadUser = (req,res)=>{
     req.user = user;
   }
 };
+let redirectLoggedInUserToHome = (req,res)=>{
+  if(req.urlIsOneOf(['/login']) && req.user) res.redirect('homePage.html');
+}
 /*============================================================================*/
 let app = WebApp.create();
 app.use(logRequest);
 app.use(loadUser);
+app.get('/',handleRequests)
+app.get('/homePage.html',handleRequests);
+app.post('/',(req,res)=>{
+  let user = registered_users.find(u=>u.userName==req.body.userName);
+  if(!user) {
+    res.setHeader('Set-Cookie',`logInFailed=true`);
+    res.redirect('/');
+    return;
+  }
+  let sessionid = new Date().getTime();
+  res.setHeader('Set-Cookie',`sessionid=${sessionid}`);
+  user.sessionid = sessionid;
+  res.redirect('/homePage.html');
+});
 
 module.exports = app;
