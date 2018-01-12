@@ -1,0 +1,40 @@
+Todoster:
+  Build a web application that helps a person maintain to-do list(s).
+
+Features:
+  ☐ Log in to their account
+  ☐ Add one or more to-do list(s)
+  ☐ View their to-do list
+  ☐ Edit a to-do list
+  ☐ Delete a to-do list
+  ☐ Add one or more to-do items to each to-do list
+  ☐ Mark any to-do item as done
+  ☐ Mark any to-do item as not done
+  ☐ Edit a to-do item
+  ☐ Delete a to-do item
+  ☐ Log out of their account
+
+Action Steps:
+  ☐ Bring in webapp framework.
+  ☐ start listening to client with server.
+  ☐ Bring in testing framework.
+  ☐ start testing with a 404.
+  ☐ write test for a login page.
+  ☐ construct a login page.
+  ☐ write test for homepage
+  ☐ load homePage after succesfull login
+  ☐ write test for view task feature and construct the same feature.
+  ☐ test and run add todo feature.
+  ☐ test and run edit todo feature.
+  ☐ '' '' '' delete '' ''.
+  ☐ display each todo individually upon click.
+  ☐ add tasks to each todo individually.
+  ☐ introduce marks done and not done feature.
+  ☐ introduce edit each task feature.
+  ☐ add delete task feature.
+  ☐ add logout option from each page.
+
+  Challenges:
+  ☐ adding tasks dynamically and storing them.
+  ☐ displaying indiviually items and displaying them dynamically.
+  ☐ creating new space for each added todo and updating it.
