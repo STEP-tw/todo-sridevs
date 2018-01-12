@@ -42,4 +42,23 @@ describe('app',()=>{
       })
     })
   })
+  describe('GET /viewList.html',()=>{
+    it('loads lists of todos',done=>{
+      request(app,{method:'GET',url:'/viewList.html'},(res)=>{
+        th.status_is_ok(res);
+        th.content_type_is(res,'text/html');
+        th.body_contains(res,'Todo\'s');
+        done();
+      })
+    })
+  })
+  describe('GET /css/style',()=>{
+    it('loads stylesheet',done=>{
+      request(app,{method:'GET',url:'/css/style.css'},(res)=>{
+        th.status_is_ok(res);
+        th.content_type_is(res,'text/css');
+        done();
+      })
+    })
+  })
 })
