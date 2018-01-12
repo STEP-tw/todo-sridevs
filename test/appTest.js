@@ -1,7 +1,7 @@
 let chai = require('chai');
 let assert = chai.assert;
 let request = require('./requestSimulator.js');
-let app = require('../app.js');
+let app = require('../src/app.js');
 let th = require('./testHelper.js');
 
 describe('app',()=>{
