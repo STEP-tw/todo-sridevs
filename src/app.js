@@ -32,6 +32,11 @@ app.use(logRequest);
 app.use(loadUser);
 app.get('/',handleRequests)
 app.get('/homePage.html',handleRequests);
+app.get('/viewList.html',handleRequests);
+app.get('/logout',(req,res)=>{
+  res.setHeader('Set-Cookie',[`logInFailed=false;sessionid=0;Expires=${new Date(1).toUTCString()}`]);
+  res.redirect('/');
+});
 app.post('/',(req,res)=>{
   let user = registered_users.find(u=>u.userName==req.body.userName);
   if(!user) {

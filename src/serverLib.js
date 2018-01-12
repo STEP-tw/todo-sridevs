@@ -45,6 +45,7 @@ let handleRequests = function (request, response) {
   // Print the name of the file for which request is made.
   console.log("Request for " + fileName + " received.");
   let data = fs.readFileSync(fileName);
+  if(request.cookies.logInFailed) response.write('<p>logIn Failed</p>');
   response.write(data);
   response.end();
 }

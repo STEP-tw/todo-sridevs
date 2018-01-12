@@ -23,4 +23,23 @@ describe('app',()=>{
       })
     })
   })
+  describe('GET /homePage.html',()=>{
+    it('loads homePage.html',done=>{
+      request(app,{method:'GET' ,url:'/homePage.html'}, (res)=>{
+        th.status_is_ok(res);
+        th.content_type_is(res,'text/html');
+        th.body_contains(res,'welcome to Todoster');
+        done();
+      })
+    })
+  })
+  describe('GET /logout',()=>{
+    it('redirects to loginPage',done=>{
+      request(app,{method:'GET',url:'/'},(res)=>{
+        th.should_be_redirected_to(res,'/loginPage.html');
+        assert.equal(res.body,"");
+        done();
+      })
+    })
+  })
 })
