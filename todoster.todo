@@ -21,8 +21,8 @@ Action Steps:
   ✔ start testing with a 404. @done(2018-01-12 15:01) @project(Action Steps)
   ✔ write test for a login page. @done(2018-01-12 15:16) @project(Action Steps)
   ✔ construct a login page. @done(2018-01-12 15:59) @project(Action Steps)
-  ☐ write test for homepage
-  ☐ load homePage after succesfull login
+  ✔ write test for homepage*/*/ @done(2018-01-12 18:10) @project(Action Steps)
+  ✔ load homePage after succesfull login @done(2018-01-12 18:10) @project(Action Steps)
   ☐ write test for view task feature and construct the same feature.
   ☐ test and run add todo feature.
   ☐ test and run edit todo feature.
