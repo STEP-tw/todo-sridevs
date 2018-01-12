@@ -13,4 +13,14 @@ describe('app',()=>{
       })
     })
   })
+  describe('GET /',()=>{
+    it('loads login page',done=>{
+      request(app,{method:'GET' ,url:'/'}, (res)=>{
+        th.status_is_ok(res);
+        th.content_type_is(res,'text/html');
+        th.body_contains(res,'Login');
+        done();
+      })
+    })
+  })
 })

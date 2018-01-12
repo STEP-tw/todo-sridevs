@@ -2,7 +2,7 @@ const timeStamp = require('./time.js').timeStamp;
 const WebApp = require('./webapp');
 const fs = require('fs');
 let registered_users = [{userName:'dev',name:'sridevs'}];
-
+let toS = o=>JSON.stringify(o,null,2);
 /*============================================================================*/
 let logRequest = (req,res)=>{
   let text = ['------------------------------',
@@ -24,5 +24,7 @@ let loadUser = (req,res)=>{
 };
 /*============================================================================*/
 let app = WebApp.create();
+app.use(logRequest);
+app.use(loadUser);
 
 module.exports = app;
