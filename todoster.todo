@@ -35,6 +35,7 @@ Action Steps:
   ☐ add logout option from each page.
 
   Challenges:
+  ☐ Failing test cases. 
   ☐ adding tasks dynamically and storing them.
   ☐ displaying indiviually items and displaying them dynamically.
   ☐ creating new space for each added todo and updating it.

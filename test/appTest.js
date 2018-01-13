@@ -1,6 +1,7 @@
 let chai = require('chai');
 let assert = chai.assert;
 let request = require('./requestSimulator.js');
+process.env.PUBLICDIRPATH = './src/public/'
 let app = require('../src/app.js');
 let th = require('./testHelper.js');
 
@@ -28,15 +29,15 @@ describe('app',()=>{
       request(app,{method:'GET' ,url:'/homePage.html'}, (res)=>{
         th.status_is_ok(res);
         th.content_type_is(res,'text/html');
-        th.body_contains(res,'welcome to Todoster');
+        th.body_contains(res,'Welcome to Todoster');
         done();
       })
     })
   })
   describe('GET /logout',()=>{
     it('redirects to loginPage',done=>{
-      request(app,{method:'GET',url:'/'},(res)=>{
-        th.should_be_redirected_to(res,'/loginPage.html');
+      request(app,{method:'GET',url:'/logout'},(res)=>{
+        th.should_be_redirected_to(res,'/');
         assert.equal(res.body,"");
         done();
       })

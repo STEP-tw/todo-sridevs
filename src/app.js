@@ -2,6 +2,7 @@ const timeStamp = require('./time.js').timeStamp;
 const WebApp = require('./webapp');
 const fs = require('fs');
 const handleRequests = require('./serverLib.js').handleRequests;
+const handleLogout = require('./serverLib.js').handleLogout;
 let registered_users = [{userName:'dev',name:'sridevs'}];
 let toS = o=>JSON.stringify(o,null,2);
 /*============================================================================*/
@@ -34,10 +35,7 @@ app.get('/',handleRequests)
 app.get('/homePage.html',handleRequests);
 app.get('/viewList.html',handleRequests);
 app.get('/css/style.css',handleRequests);
-app.get('/logout',(req,res)=>{
-  res.setHeader('Set-Cookie',[`logInFailed=false;sessionid=0;Expires=${new Date(1).toUTCString()}`]);
-  res.redirect('/');
-});
+app.get('/logout',handleLogout);
 app.post('/',(req,res)=>{
   let user = registered_users.find(u=>u.userName==req.body.userName);
   if(!user) {
