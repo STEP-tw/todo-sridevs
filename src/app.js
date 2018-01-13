@@ -26,7 +26,8 @@ let loadUser = (req,res)=>{
 };
 let redirectLoggedInUserToHome = (req,res)=>{
   if(req.urlIsOneOf(['/login']) && req.user) res.redirect('homePage.html');
-}
+};
+
 /*============================================================================*/
 let app = WebApp.create();
 app.use(logRequest);

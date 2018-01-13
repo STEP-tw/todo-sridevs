@@ -48,13 +48,16 @@ let handleRequests = function (request, response) {
   console.log("Request for " + fileName + " received.");
   let data = fs.readFileSync(fileName);
   setContentType(response,fileName);
-  // if(request.cookies.logInFailed) response.write('<p>logIn Failed</p>');
+  console.log(`----------${request.url}`);
   response.write(data);
+  if(request.cookies.logInFailed && request.url == '/') {
+    response.write('<p>login Failed</p>');
+  }
   response.end();
 }
 
 let handleLogout = (req,res)=>{
-  res.setHeader('Set-Cookie',[`logInFailed=false;sessionid=0;Expires=${new Date(1).toUTCString()}`]);
+  res.setHeader('Set-Cookie',[`logInFailed=false;Expires=${new Date(1).toUTCString()}`]);
   res.redirect('/');
 }
 
