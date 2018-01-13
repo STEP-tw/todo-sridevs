@@ -6,9 +6,9 @@ let app = require('../src/app.js');
 let th = require('./testHelper.js');
 
 describe('app',()=>{
-  describe('GET /nonExistingFile',()=>{
+  describe('GET /bad',()=>{
     it('responds with 404',done=>{
-      request(app,{method:'GET',url:'/nonExistingFile'},(res)=>{
+      request(app,{method:'GET',url:'/bad'},(res)=>{
         assert.equal(res.statusCode,404);
         done();
       })

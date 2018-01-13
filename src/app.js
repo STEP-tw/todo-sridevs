@@ -3,6 +3,7 @@ const WebApp = require('./webapp');
 const fs = require('fs');
 const handleRequests = require('./serverLib.js').handleRequests;
 const handleLogout = require('./serverLib.js').handleLogout;
+let publicDir = process.env.PUBLICDIRPATH || 'public';
 let registered_users = [{userName:'dev',name:'sridevs'}];
 let toS = o=>JSON.stringify(o,null,2);
 /*============================================================================*/
@@ -25,7 +26,8 @@ let loadUser = (req,res)=>{
   }
 };
 let serveStaticFiles = (req,res)=>{
-  if (!req.urlIsOneOf(['/logout']) ) {
+  console.log(`------------${publicDir + req.url}`);
+  if (!req.urlIsOneOf(['/logout']) && fs.existsSync(publicDir + req.url)) {
     app.get(req.url,handleRequests);
   }
 }
@@ -47,5 +49,5 @@ app.post('/',(req,res)=>{
   user.sessionid = sessionid;
   res.redirect('/homePage.html');
 });
-
+// app.post('todoWithDesc',);
 module.exports = app;

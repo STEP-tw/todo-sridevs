@@ -1,6 +1,4 @@
 let fs = require('fs');
-let prependFile = require('prepend-file');
-
 let publicDir = process.env.PUBLICDIRPATH || './public/';
 let registered_users = [{userName:'dev',name:'sridevs'}];
 let setContentType = function (response,fileName) {
