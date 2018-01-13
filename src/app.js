@@ -24,20 +24,17 @@ let loadUser = (req,res)=>{
     req.user = user;
   }
 };
-let redirectLoggedInUserToHome = (req,res)=>{
-  if(req.urlIsOneOf(['/login']) && req.user) res.redirect('homePage.html');
-};
-
+let serveStaticFiles = (req,res)=>{
+  if (!req.urlIsOneOf(['/logout']) ) {
+    app.get(req.url,handleRequests);
+  }
+}
 /*============================================================================*/
 let app = WebApp.create();
 app.use(logRequest);
 app.use(loadUser);
-app.get('/',handleRequests)
-app.get('/homePage.html',handleRequests);
-app.get('/viewList.html',handleRequests);
-app.get('/css/style.css',handleRequests);
+app.use(serveStaticFiles)
 app.get('/logout',handleLogout);
-app.get('/images/bgImage.jpg',handleRequests);
 app.post('/',(req,res)=>{
   let user = registered_users.find(u=>u.userName==req.body.userName);
   if(!user) {
