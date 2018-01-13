@@ -37,6 +37,7 @@ app.get('/homePage.html',handleRequests);
 app.get('/viewList.html',handleRequests);
 app.get('/css/style.css',handleRequests);
 app.get('/logout',handleLogout);
+app.get('/images/bgImage.jpg',handleRequests);
 app.post('/',(req,res)=>{
   let user = registered_users.find(u=>u.userName==req.body.userName);
   if(!user) {

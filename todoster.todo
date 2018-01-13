@@ -23,7 +23,7 @@ Action Steps:
   ✔ construct a login page. @done(2018-01-12 15:59) @project(Action Steps)
   ✔ write test for homepage*/*/ @done(2018-01-12 18:10) @project(Action Steps)
   ✔ load homePage after succesfull login @done(2018-01-12 18:10) @project(Action Steps)
-  ☐ write test for view task feature and construct the same feature.
+  ✔ write test for view task feature and construct the same feature. @done(2018-01-13 12:33) @project(Action Steps)
   ☐ test and run add todo feature.
   ☐ test and run edit todo feature.
   ☐ '' '' '' delete '' ''.
@@ -35,7 +35,7 @@ Action Steps:
   ☐ add logout option from each page.
 
   Challenges:
-  ☐ Failing test cases. 
+  ☐ Failing test cases.
   ☐ adding tasks dynamically and storing them.
   ☐ displaying indiviually items and displaying them dynamically.
   ☐ creating new space for each added todo and updating it.

@@ -62,4 +62,13 @@ describe('app',()=>{
       })
     })
   })
+  describe('GET backgroud-image',()=>{
+    it('loads stylesheet',done=>{
+      request(app,{method:'GET',url:'/images/bgImage.jpg'},(res)=>{
+        th.status_is_ok(res);
+        th.content_type_is(res,'img/jpg');
+        done();
+      })
+    })
+  })
 })
