@@ -3,6 +3,7 @@ const WebApp = require('./webapp');
 const fs = require('fs');
 const handleRequests = require('./serverLib.js').handleRequests;
 const handleLogout = require('./serverLib.js').handleLogout;
+const todoLib = require('./todoHandler.js').lib;
 let publicDir = process.env.PUBLICDIRPATH || 'public';
 let registered_users = [{userName:'dev',name:'sridevs'}];
 let toS = o=>JSON.stringify(o,null,2);
@@ -26,8 +27,8 @@ let loadUser = (req,res)=>{
   }
 };
 let serveStaticFiles = (req,res)=>{
-  console.log(`------------${publicDir + req.url}`);
-  if (!req.urlIsOneOf(['/logout']) && fs.existsSync(publicDir + req.url)) {
+  let path = publicDir + req.url;
+  if (!req.urlIsOneOf(['/logout']) && fs.existsSync(path)) {
     app.get(req.url,handleRequests);
   }
 }
@@ -49,5 +50,5 @@ app.post('/',(req,res)=>{
   user.sessionid = sessionid;
   res.redirect('/homePage.html');
 });
-// app.post('todoWithDesc',);
+app.post('/todoWithDesc',todoLib.storeTodo);
 module.exports = app;
