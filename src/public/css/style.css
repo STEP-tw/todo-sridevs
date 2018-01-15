@@ -39,6 +39,12 @@ p{
   font-size: 60%;
 }
 
+pre{
+  color: black;
+  font-family: sans-serif;
+  font-size: 80%;
+}
+
 #para{
   text-align: left;
   font-family: sans-serif;

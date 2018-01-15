@@ -3,6 +3,7 @@ let request = function(app,options,onComplete){
   let res_headers = {};
   let res_contents = "";
   let req = new EventEmitter();
+  console.log('---------------',options.body);
   req.method = options.method;
   req.url = options.url;
   req.headers = options.headers||{};

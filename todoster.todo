@@ -2,7 +2,7 @@ Todoster:
   Build a web application that helps a person maintain to-do list(s).
 
 Features:
-  ☐ Log in to their account
+  ✔ Log in to their account @done(2018-01-13 16:01) @project(Features)
   ☐ Add one or more to-do list(s)
   ☐ View their to-do list
   ☐ Edit a to-do list
@@ -12,9 +12,9 @@ Features:
   ☐ Mark any to-do item as not done
   ☐ Edit a to-do item
   ☐ Delete a to-do item
-  ☐ Log out of their account
+  ✔ Log out of their account @done(2018-01-13 16:01) @project(Features)
 
-Action Steps:
+Static Todo:
   ✔ Bring in webapp framework. @done(2018-01-12 15:01) @project(Action Steps)
   ✔ start listening to client with server. @done(2018-01-12 15:01) @project(Action Steps)
   ✔ Bring in testing framework. @done(2018-01-12 15:01) @project(Action Steps)
@@ -35,7 +35,13 @@ Action Steps:
   ☐ add logout option from each page.
 
   Challenges:
-  ☐ Failing test cases.
+  ✔ Failing test cases. @done(2018-01-15 14:33) @project(Static Todo)
   ☐ adding tasks dynamically and storing them.
   ☐ displaying indiviually items and displaying them dynamically.
   ☐ creating new space for each added todo and updating it.
+
+  Dynamic Todo:
+    ✔ make a class todo which holds owner/user, title ,description and status. @done(2018-01-15 14:49) @project(Static Todo / Dynamic Todo)
+    ☐ additionaly the todo class should hold tasks.
+    ☐ todo should have edit, delete, markdone, undone options.
+    ☐ each task should have all those features.

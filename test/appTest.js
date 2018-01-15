@@ -71,31 +71,16 @@ describe('app',()=>{
       })
     })
   })
-  describe('POST /',()=>{
+  describe('login',()=>{
     it('redirects to homePage for valid user',done=>{
-      request(app,{method:'POST',url:'/',body:'username=dev'},res=>{
-        th.should_be_redirected_to(res,'/');
-        th.should_not_have_cookie(res,'message');
-        done();
-      })
-    })
-    it('redirects to loginPage with message for invalid user',done=>{
-      request(app,{method:'POST',url:'/',body:'username=badUser'},res=>{
-        th.should_be_redirected_to(res,'/');
-        done();
-      })
-    })
-  })
-  describe('POST /todoWithDesc',()=>{
-    it.skip('stores the todo message with description',done=>{
-      request(app,{method:'POST',url:'/homePage.html',body:'username=dev'},res=>{
+      request(app,{method:'POST',url:'/',body:'userName=dev'},res=>{
         th.should_be_redirected_to(res,'/homePage.html');
         th.should_not_have_cookie(res,'message');
         done();
       })
     })
     it('redirects to loginPage with message for invalid user',done=>{
-      request(app,{method:'POST',url:'/',body:'username=badUser'},res=>{
+      request(app,{method:'POST',url:'/',body:'userName=badUser'},res=>{
         th.should_be_redirected_to(res,'/');
         done();
       })

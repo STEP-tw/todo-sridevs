@@ -28,10 +28,11 @@ let loadUser = (req,res)=>{
 };
 let serveStaticFiles = (req,res)=>{
   let path = publicDir + req.url;
-  if (!req.urlIsOneOf(['/logout']) && fs.existsSync(path)) {
+  if (fs.existsSync(path)) {
     app.get(req.url,handleRequests);
   }
 }
+
 /*============================================================================*/
 let app = WebApp.create();
 app.use(logRequest);
