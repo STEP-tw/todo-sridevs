@@ -1,12 +1,19 @@
 const fs = require('fs');
+const Todo = require('./todo.js').Todo;
 
 class TodoHandler {
   constructor(todos,deletedTodos,completedTodos,liveTodos) {
-    this.todos = todos;
-    this.deletedTodos = deletedTodos;
-    this.completedTodos = completedTodos;
-    this.currentTodos = liveTodos;
+    this.todos = todos || [];
+    this.deletedTodos = deletedTodos || [];
+    this.completedTodos = completedTodos  || [];
+    this.currentTodos = liveTodos || [];
   }
+
+  addTodo(todo) {
+    this.todos.push(todo);
+    return this.todos;
+  }
+
 }
 // lib.storeTodo = function (req,res) {
 //   let todoTitle = req.body.title;
