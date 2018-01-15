@@ -41,4 +41,20 @@ describe('Todo',function () {
       assert.equal(todo.delete(),'deleted');
     })
   })
+
+  describe('addTask',function () {
+    it('should add task items in the todo',function () {
+      let taskTitle = 'test' ,
+          taskDesc = 'test of tests',
+          task = new Todo(taskTitle,taskDesc);
+
+      assert.deepEqual(todo.addTask(task) , [task]);
+    })
+  })
+
+  describe.skip('getTask',function () {
+    it('should get all the task items of the todo',function () {
+      assert.equal
+    })
+  })
 })

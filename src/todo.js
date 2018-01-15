@@ -4,6 +4,7 @@ class Todo {
     this.title = title;
     this.description = desc;
     this.status = 'undone';
+    this.tasks = [];
   }
   //should mark status as done.
   markDone () {
@@ -21,6 +22,11 @@ class Todo {
 
   delete() {
     return this.status = 'deleted';
+  }
+
+  addTask(task) {
+    this.tasks.push(task);
+    return this.tasks;
   }
 }
 
