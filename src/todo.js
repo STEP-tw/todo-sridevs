@@ -28,6 +28,11 @@ class Todo {
     this.tasks.push(task);
     return this.tasks;
   }
+  //getters
+  get allTasks() {
+    return this.tasks;
+  }
+
 }
 
 

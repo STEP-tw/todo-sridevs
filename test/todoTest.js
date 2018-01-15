@@ -52,9 +52,9 @@ describe('Todo',function () {
     })
   })
 
-  describe.skip('getTask',function () {
+  describe('get allTask',function () {
     it('should get all the task items of the todo',function () {
-      assert.equal
+      assert.deepEqual(todo.allTasks,[]);
     })
   })
 })
