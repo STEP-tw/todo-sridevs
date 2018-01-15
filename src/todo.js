@@ -9,7 +9,10 @@ class Todo {
   markDone () {
     return this.status = 'done';
   }
-  //
+  //mark undone
+  markUndone(){
+    return this.status = 'undone'
+  }
 }
 
 

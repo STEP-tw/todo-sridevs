@@ -19,4 +19,10 @@ describe('Todo',function () {
     })
   })
 
+  describe('markUndone',function () {
+    it('should change todo\'s status to undone',function () {
+      todo.markUndone();
+      assert.equal(todo.status,'undone');
+    })
+  })
 })
