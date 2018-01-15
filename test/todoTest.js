@@ -1,6 +1,8 @@
 const Todo = require('../src/todo.js').Todo;
 const assert = require('chai').assert;
 
+var todo;
+
 describe('Todo',function () {
   beforeEach(function () {
     todo = new Todo('sridev','hi','hello');

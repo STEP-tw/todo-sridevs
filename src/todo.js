@@ -23,7 +23,7 @@ class Todo {
   delete() {
     return this.status = 'deleted';
   }
-
+  //should add items in the todo.
   addTask(task) {
     this.tasks.push(task);
     return this.tasks;
@@ -32,7 +32,6 @@ class Todo {
   get allTasks() {
     return this.tasks;
   }
-
 }
 
 

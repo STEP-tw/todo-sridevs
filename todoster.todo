@@ -42,7 +42,9 @@ Static Todo:
 
   Dynamic Todo:
     ✔ make a class todo which holds owner/user, title ,description and status. @done(2018-01-15 14:49) @project(Static Todo / Dynamic Todo)
-    ☐ additionaly the todo class should hold tasks.
+    ✔ additionaly the todo class should hold tasks. @done(2018-01-15 19:23) @project(Static Todo / Dynamic Todo)
     ✔ todo should have edit, markdone, undone options. @done(2018-01-15 17:38) @project(Static Todo / Dynamic Todo)
     ✔ todo should have a delete method @done(2018-01-15 17:45) @project(Static Todo / Dynamic Todo)
-    ☐ each task should have all those features.
+    ✔ each task should have all those features. @done(2018-01-15 19:23) @project(Static Todo / Dynamic Todo)
+    ☐ add a TodoHandler class.
+    ☐ 
