@@ -25,4 +25,14 @@ describe('Todo',function () {
       assert.equal(todo.status,'undone');
     })
   })
+
+  describe('edit',function () {
+    it('should edit title and description',function () {
+      let newTitle = 'title changed' ,
+          newDesc = 'desc changed';
+      todo.edit(newTitle, newDesc);
+      assert.equal(todo.title,newTitle);
+      assert.equal(todo.description,newDesc)
+    })
+  })
 })
