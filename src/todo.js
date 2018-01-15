@@ -18,6 +18,10 @@ class Todo {
     this.title = title;
     this.description = description;
   }
+
+  delete() {
+    return this.status = 'deleted';
+  }
 }
 
 

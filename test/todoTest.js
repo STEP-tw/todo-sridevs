@@ -35,4 +35,10 @@ describe('Todo',function () {
       assert.equal(todo.description,newDesc)
     })
   })
+
+  describe('delete',function () {
+    it('should mark the todos status as deleted',function () {
+      assert.equal(todo.delete(),'deleted');
+    })
+  })
 })
