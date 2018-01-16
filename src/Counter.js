@@ -1,21 +1,21 @@
-class IdHandler {
+class Counter {
   constructor(initialValue, addend) {
     this.initialValue = initialValue || 0;
-    this.id = this.initialValue;
+    this.count = this.initialValue;
     this.addend = addend || 1;
   }
 
   increment() {
-    this.id += this.addend;
+    this.count += this.addend;
   }
 
   reset() {
-    this.id = this.initialValue;
+    this.count = this.initialValue;
   }
 
   generateId() {
     this.increment();
-    return this.id;
+    return this.count;
   }
 }
-exports.IdHandler = IdHandler;
+exports.Counter = Counter;

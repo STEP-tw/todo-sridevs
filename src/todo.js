@@ -1,10 +1,9 @@
-const IdHandler = require('./IdHandler.js').IdHandler;
-const idHandler = new IdHandler;
+const Counter = require('./Counter.js').Counter;
+const idCounter = new Counter;
 
 class Todo {
   constructor(owner,title,desc) {
-    this.id = idHandler.generateId();
-    this.owner = owner;
+    this.id = idCounter.generateId();
     this.title = title;
     this.description = desc;
     this.status = 'undone';

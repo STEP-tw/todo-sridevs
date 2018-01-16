@@ -3,7 +3,6 @@ const WebApp = require('./webapp');
 const fs = require('fs');
 const handleRequests = require('./serverLib.js').handleRequests;
 const handleLogout = require('./serverLib.js').handleLogout;
-const todoLib = require('./todoHandler.js').lib;
 let publicDir = process.env.PUBLICDIRPATH || 'public';
 let registered_users = [{userName:'dev',name:'sridevs'}];
 let toS = o=>JSON.stringify(o,null,2);
@@ -51,5 +50,4 @@ app.post('/',(req,res)=>{
   user.sessionid = sessionid;
   res.redirect('/homePage.html');
 });
-// app.post('/todoWithDesc',todoLib.storeTodo);
 module.exports = app;
