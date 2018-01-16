@@ -26,13 +26,22 @@ describe('class IdHandler',function () {
       idHandler2.increment();
       assert.equal(idHandler2.id,5);
     })
-    describe('reset',function () {
-      it('resets its id to initialValue',function () {
-        idHandler2.increment();
-        assert.equal(idHandler2.id,3);
-        idHandler2.reset();
-        assert.equal(idHandler2.id,1);
-      })
+  })
+
+  describe('reset',function () {
+    it('resets its id to initialValue',function () {
+      idHandler2.increment();
+      assert.equal(idHandler2.id,3);
+      idHandler2.reset();
+      assert.equal(idHandler2.id,1);
+    })
+  })
+
+  describe('generateId',function () {
+    it('generates a new id in ascending order',function () {
+      assert.equal(idHandler.generateId(),1);
+      assert.equal(idHandler.generateId(),2);
+      assert.equal(idHandler.generateId(),3);
     })
   })
 })

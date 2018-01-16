@@ -12,5 +12,10 @@ class IdHandler {
   reset() {
     this.id = this.initialValue;
   }
+
+  generateId() {
+    this.increment();
+    return this.id;
+  }
 }
 exports.IdHandler = IdHandler;

@@ -1,8 +1,11 @@
 const fs = require('fs');
 const Todo = require('./todo.js').Todo;
+const IdHandler = require('./IdHandler.js').IdHandler;
+const idHandler = new IdHandler(-1);
 
 class TodoHandler {
   constructor(todos,deletedTodos,completedTodos,liveTodos) {
+    this.id = idHandler.id;
     this.todos = todos || [];
     this.deletedTodos = deletedTodos || [];
     this.completedTodos = completedTodos  || [];
