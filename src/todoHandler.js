@@ -1,25 +1,22 @@
 const fs = require('fs');
 const Todo = require('./todo.js').Todo;
-const IdHandler = require('./IdHandler.js').IdHandler;
-const idHandler = new IdHandler(-1);
 
 class TodoHandler {
   constructor(todos,deletedTodos,completedTodos,liveTodos) {
-    this.id = idHandler.id;
-    this.todos = todos || [];
-    this.deletedTodos = deletedTodos || [];
-    this.completedTodos = completedTodos  || [];
-    this.liveTodos = liveTodos || [];
+    this.todos = todos || {};
+    this.deletedTodos = deletedTodos || {};
+    this.completedTodos = completedTodos  || {};
+    this.liveTodos = liveTodos || {};
   }
 
   addTodo(todo) {
-    this.todos.push(todo);
+    this.todos[todo.id] = todo;
     return this.todos;
   }
 
   markDone(todo) {
-    this.todos[todo.id].status = 'done';
-    this.todos.completedTodos.push(todo);
+    this.todos[todo.id].markDone();
+    this.completedTodos[todo.id] = todo;
   }
 }
 // lib.storeTodo = function (req,res) {

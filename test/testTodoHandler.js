@@ -18,14 +18,27 @@ describe('TodoHandler',function () {
     it('should addTodo into its todoList',function () {
       todoHandler.addTodo(todo1);
       todoHandler.addTodo(todo2);
-      assert.includeDeepOrderedMembers(todoHandler.todos,[todo1,todo2]);
+      assert.deepEqual(todoHandler.todos[todo1.id],todo1);
+      assert.deepEqual(todoHandler.todos[todo2.id],todo2);
     })
   })
-  describe.skip('markDone',function () {
-    it('should change the status of given todo to done',function () {
+  describe('markDone',function () {
+    beforeEach(function () {
+      todoHandler.addTodo(todo1);
+      todoHandler.addTodo(todo2);
       todoHandler.markDone(todo2);
       todoHandler.markDone(todo1);
-      assert.includeDeepOrderedMembers(this.completed,[todo2,todo1]);
+    })
+    it('should add the given todo in completedTodos',function () {
+      assert.deepEqual(todoHandler.completedTodos[todo1.id],todo1);
+      assert.deepEqual(todoHandler.completedTodos[todo2.id],todo2);
+    })
+    it('should change the status of given todo to done ',function () {
+      function isDone(todo) {
+        return todoHandler.todos[todo.id].status === 'done';
+      }
+      assert.isTrue(isDone(todo1));
+      assert.isTrue(isDone(todo2));
     })
   })
   describe.skip('getLiveTodo',function () {

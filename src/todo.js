@@ -1,6 +1,9 @@
+const IdHandler = require('./IdHandler.js').IdHandler;
+const idHandler = new IdHandler;
+
 class Todo {
   constructor(owner,title,desc) {
-    this.id = idHandler.getId; 
+    this.id = idHandler.generateId();
     this.owner = owner;
     this.title = title;
     this.description = desc;
