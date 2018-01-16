@@ -56,7 +56,7 @@ describe('TodoBank',function () {
   describe.skip('getLiveTodo',function () {
     it('should get the list of liveTodos',function () {
       todoBank.getLiveTodo;
-      assert.deepEqual(this.liveTodos)
+      assert.deepEqual(todoBank.liveTodos)
     })
   })
   describe.skip('deleteTodo',function () {
