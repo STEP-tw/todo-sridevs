@@ -3,7 +3,7 @@ const idCounter = new Counter;
 
 class Todo {
   constructor(owner,title,desc) {
-    this.id = idCounter.generateId();
+    this.id = idCounter.increment();
     this.title = title;
     this.description = desc;
     this.status = 'undone';

@@ -1,5 +1,5 @@
 const prefix= '../src/';
-const Counter = require(`${prefix}Counter.js`).Counter;
+const Counter = require(`${prefix}counter.js`).Counter;
 const assert = require('chai').assert;
 
 describe('class Counter',function () {
@@ -34,14 +34,6 @@ describe('class Counter',function () {
       assert.equal(counter2.count,3);
       counter2.reset();
       assert.equal(counter2.count,1);
-    })
-  })
-
-  describe('generateId',function () {
-    it('generates a new count in ascending order',function () {
-      assert.equal(counter.generateId(),1);
-      assert.equal(counter.generateId(),2);
-      assert.equal(counter.generateId(),3);
     })
   })
 })

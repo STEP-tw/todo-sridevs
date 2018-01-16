@@ -6,16 +6,11 @@ class Counter {
   }
 
   increment() {
-    this.count += this.addend;
+    return this.count += this.addend;
   }
 
   reset() {
     this.count = this.initialValue;
-  }
-
-  generateId() {
-    this.increment();
-    return this.count;
   }
 }
 exports.Counter = Counter;

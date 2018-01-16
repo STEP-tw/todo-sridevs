@@ -1,7 +1,16 @@
 const fs = require('fs');
 const Todo = require('./todo.js').Todo;
+let utils = {};
+utils.assignKeyValue = function(obj,key,value) {
+  obj[key] = value;
+  return obj;
+}
 
-class TodoBank {
+utils.fetch = function(obj,key) {
+  return obj[key];
+}
+
+class TodoRepository {
   constructor(todos,deletedTodos,completedTodos,liveTodos) {
     this.todos = todos || {};
     this.deletedTodos = deletedTodos || {};
@@ -9,28 +18,19 @@ class TodoBank {
     this.liveTodos = liveTodos || {};
   }
 
-  assignKeyValue(obj,key,value) {
-    obj[key] = value;
-    return obj;
-  }
-
-  fetch(obj,key) {
-    return obj[key];
-  }
-
   addTodo(todo) {
-    this.assignKeyValue(this.todos,todo.id,todo);
-    this.assignKeyValue(this.liveTodos,todo.id,todo);
+    utils.assignKeyValue(this.todos,todo.id,todo);
+    utils.assignKeyValue(this.liveTodos,todo.id,todo);
     return this.todos;
   }
 
   markDone(todo) {
-    this.fetch(this.todos,todo.id).markDone();
-    this.assignKeyValue(this.completedTodos,todo.id,todo);
+    utils.fetch(this.todos,todo.id).markDone();
+    utils.assignKeyValue(this.completedTodos,todo.id,todo);
   }
 
   markUndone(todo) {
-    this.fetch(this.todos,todo.id).markUndone();
+    fetch(this.todos,todo.id).markUndone();
     delete this.completedTodos[todo.id];
   }
 }
@@ -46,4 +46,5 @@ class TodoBank {
 //   res.redirect('/homePage.html');
 // };
 
-exports.TodoBank = TodoBank;
+exports.TodoRepository = TodoRepository;
+exports.utils = utils;
