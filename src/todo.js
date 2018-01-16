@@ -1,5 +1,6 @@
 class Todo {
   constructor(owner,title,desc) {
+    this.id = idHandler.getId; 
     this.owner = owner;
     this.title = title;
     this.description = desc;

@@ -6,7 +6,7 @@ class TodoHandler {
     this.todos = todos || [];
     this.deletedTodos = deletedTodos || [];
     this.completedTodos = completedTodos  || [];
-    this.currentTodos = liveTodos || [];
+    this.liveTodos = liveTodos || [];
   }
 
   addTodo(todo) {
@@ -14,6 +14,10 @@ class TodoHandler {
     return this.todos;
   }
 
+  markDone(todo) {
+    this.todos[todo.id].status = 'done';
+    this.todos.completedTodos.push(todo);
+  }
 }
 // lib.storeTodo = function (req,res) {
 //   let todoTitle = req.body.title;
