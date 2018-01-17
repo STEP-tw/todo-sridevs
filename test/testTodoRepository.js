@@ -3,6 +3,7 @@ const TodoRepository = require(`${prefix}todoRepository.js`).TodoRepository;
 const utils = require(`${prefix}todoRepository.js`).utils;
 const Todo = require(`${prefix}todo.js`).Todo;
 const assert = require('chai').assert;
+const toS = o=>JSON.stringify(o,null,2);
 
 var todoRepository , todo1 , todo2;
 
