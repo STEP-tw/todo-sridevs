@@ -1,42 +1,16 @@
-const Counter = require('./Counter.js').Counter;
-const idCounter = new Counter;
+const Item= require('./item.js').Item;
 
-class Todo {
-  constructor(owner,title,desc) {
-    this.id = idCounter.increment();
-    this.title = title;
-    this.description = desc;
-    this.status = 'undone';
-    this.tasks = [];
+class Todo extends Item {
+  constructor(title,desc) {
+    super();
   }
-  //should mark status as done.
-  markDone () {
-    return this.status = 'done';
-  }
-  //should mark status as undone.
-  markUndone(){
-    return this.status = 'undone'
-  }
-  //edit should change name and description.
-  edit(title,description){
-    this.title = title;
-    this.description = description;
-  }
-
-  markDeleted() {
-    return this.status = 'deleted';
-  }
-  //should add items in the todo.
-  addTask(task) {
-    this.tasks.push(task);
-    return this.tasks;
-  }
-  //getters
-  get allTasks() {
-    return this.tasks;
-  }
+    addTask(task) {
+      this.tasks.push(task);
+      return this.tasks;
+    }
+    //getters
+    get allTasks() {
+      return this.tasks;
+    }
 }
-
-
-
-exports.Todo = Todo;
+module.exports = Todo;

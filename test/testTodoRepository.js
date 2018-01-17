@@ -1,7 +1,7 @@
 const prefix= '../src/';
 const TodoRepository = require(`${prefix}todoRepository.js`).TodoRepository;
 const utils = require(`${prefix}todoRepository.js`).utils;
-const Todo = require(`${prefix}todo.js`).Todo;
+const Todo = require(`${prefix}todo.js`);
 const assert = require('chai').assert;
 const toS = o=>JSON.stringify(o,null,2);
 

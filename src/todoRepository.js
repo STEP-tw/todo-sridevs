@@ -1,5 +1,5 @@
 const fs = require('fs');
-const Todo = require('./todo.js').Todo;
+const Todo = require('./todo.js');
 let utils = {};
 utils.assignKeyValue = function(obj,key,value) {
   obj[key] = value;

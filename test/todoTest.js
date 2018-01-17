@@ -1,4 +1,4 @@
-const Todo = require('../src/todo.js').Todo;
+const Todo = require('../src/todo.js');
 const assert = require('chai').assert;
 
 var todo;
