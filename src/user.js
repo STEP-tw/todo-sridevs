@@ -8,6 +8,12 @@ class User {
     this.todoRepository = todoRepository || {};
   }
 
+  addRepo(repo) {
+    return this.todoRepository = repo;
+  }
 
+  emptyRepo(repo) {
+    return this.todoRepository = {};
+  }
 }
 exports.User = User;

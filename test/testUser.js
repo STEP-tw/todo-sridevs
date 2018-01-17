@@ -9,10 +9,6 @@ describe('User',function () {
     user = new User;
   })
 
-  it('should create an instance of itself',function () {
-    assert.isTrue(user instanceof User);
-  })
-
   it('should contain a unique Id',function () {
     assert.property(user,'id');
   })
@@ -25,4 +21,20 @@ describe('User',function () {
     assert.deepPropertyVal(user,'todoRepository',{});
   })
 
+  describe('addRepo',function () {
+    it('should add a repository',function () {
+      let repo = {todos: {}, completedTodos: {}};
+      user.addRepo(repo);
+      assert.deepEqual(user.todoRepository,repo);
+    })
+  })
+
+  describe('emptyRepo',function () {
+    it('should clear repository',function () {
+      let repo = {todos: {}, completedTodos: {}};
+      user.addRepo(repo);
+      user.emptyRepo();
+      assert.deepEqual(user.todoRepository,{});
+    })
+  })
 })
