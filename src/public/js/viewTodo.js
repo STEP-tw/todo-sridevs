@@ -12,9 +12,14 @@ xhttp.onreadystatechange = function() {
 xhttp.open("GET", url, true);
 xhttp.send();
 
-function displayTodo(todos) {
-  document.getElementById('todoList').innerHTML = `
-  title ${todos[0].title}
-  <p>description ${todos[1].description}</p>
+function displayTitleWithDesc(todos) {
+  return `
+  title - ${todos.title}
+  <p>description - ${todos.description}</p>
+  <br>
   `
+}
+function displayTodo(todos) {
+  let contents = todos.map(displayTitleWithDesc).join("");
+  document.getElementById('todoList').innerHTML = contents;
 }

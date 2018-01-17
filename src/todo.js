@@ -23,7 +23,7 @@ class Todo {
     this.description = description;
   }
 
-  delete() {
+  markDeleted() {
     return this.status = 'deleted';
   }
   //should add items in the todo.

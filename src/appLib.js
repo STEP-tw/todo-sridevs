@@ -24,10 +24,6 @@ let setContentType = function (response,fileName) {
   response.setHeader('Content-Type',headers[fileType]);
 };
 
-lib.isItData = function (fileName) {
-  let validDataFiles = ['data/todoList.json'];
-  return fileName.includes(validDataFiles);
-};
 
 let getFileName = function (request) {
   let fileName = request.url.substr(1);
@@ -36,7 +32,11 @@ let getFileName = function (request) {
   }else {
     return publicDir + (fileName || 'loginPage.html');
   }
+};
 
+lib.isItData = function (fileName) {
+  let validDataFiles = ['data/todoList.json'];
+  return fileName.includes(validDataFiles);
 };
 
 lib.handleRequests = function (request, response) {
@@ -70,6 +70,7 @@ lib.handleLogin = (req,res)=>{
   user.sessionid = sessionid;
   res.redirect('/homePage.html');
 }
+
 lib.storeTodo = function (req,res) {
   let todoTitle = req.body.title;
   let todoDescription = req.body.description;
@@ -82,6 +83,7 @@ lib.storeTodo = function (req,res) {
   fs.writeFile("./data/todoList.json",JSON.stringify(todoList,null,2));
   res.redirect('/homePage.html');
 };
+
 lib.loadUser = (req,res)=>{
   let sessionid = req.cookies.sessionid;
   let user = registered_users.find(u=>u.sessionid==sessionid);
@@ -89,6 +91,7 @@ lib.loadUser = (req,res)=>{
     req.user = user;
   }
 };
+
 lib.logRequest = (req,res)=>{
   let text = ['------------------------------',
     `${timeStamp()}`,
@@ -100,4 +103,5 @@ lib.logRequest = (req,res)=>{
 
   console.log(`${req.method} ${req.url}`);
 };
+
 exports.lib = lib;

@@ -40,7 +40,7 @@ describe('Todo',function () {
 
   describe('delete',function () {
     it('should mark the todos status as deleted',function () {
-      assert.equal(todo.delete(),'deleted');
+      assert.equal(todo.markDeleted(),'deleted');
     })
   })
 

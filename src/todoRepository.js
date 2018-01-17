@@ -26,25 +26,22 @@ class TodoRepository {
 
   markDone(todo) {
     utils.fetch(this.todos,todo.id).markDone();
+    delete this.liveTodos[todo.id]
     utils.assignKeyValue(this.completedTodos,todo.id,todo);
   }
 
   markUndone(todo) {
-    fetch(this.todos,todo.id).markUndone();
+    utils.fetch(this.todos,todo.id).markUndone();
     delete this.completedTodos[todo.id];
+    utils.assignKeyValue(this.liveTodos,todo.id,todo);
+  }
+
+  deleteTodo(todo) {
+    utils.fetch(this.todos,todo.id).markDeleted();
+    utils.assignKeyValue(this.deletedTodos,todo.id,todo);
+    delete this.liveTodos[todo.id];
   }
 }
-// lib.storeTodo = function (req,res) {
-//   let todoTitle = req.body.title;
-//   let todoDescription = req.body.description;
-//   let titleWithDesc = JSON.stringify({
-//     "title":todoTitle,
-//     "description": todoDescription
-//   })
-//   let todoList = fs.readFileSync("./data/todoList.json") + titleWithDesc;
-//   fs.writeFile("./data/todoList.json",todoList);
-//   res.redirect('/homePage.html');
-// };
 
 exports.TodoRepository = TodoRepository;
 exports.utils = utils;
