@@ -2,9 +2,9 @@ const TodoRepository = require('./todoRepository').TodoRepository;
 const Counter = require('./counter.js').Counter;
 const idGenerator = new Counter;
 class User {
-  constructor(id,name,todoRepository) {
-    this.id = id || idGenerator.increment();
+  constructor(name,id,todoRepository) {
     this.name = name || '';
+    this.id = id || idGenerator.increment();
     this.todoRepository = todoRepository || new TodoRepository;
   }
 

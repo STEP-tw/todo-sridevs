@@ -44,8 +44,14 @@ let getFileName = function (request) {
 };
 
 let getUserName = function (req) {
-  return req.body.userName;
+  return req.body.userName || req.cookies.userName;
 }
+
+let refineContents = function (contents) {
+  contents = contents.replace(/\+/g,' ');
+  refinedcontents = decodeURIComponent(contents);
+  return refinedcontents;
+};
 
 lib.isItData = function (fileName) {
   let validDataFiles = ['data/todoList.json'];
@@ -77,7 +83,6 @@ let getFilePath = function (usrName) {
 }
 
 lib.handleLogin = (req,res)=>{
-  debugger;
   let usrName = getUserName(req);
   let userRepo = new User(usrName)
   let filePath = getFilePath(usrName);
@@ -98,10 +103,11 @@ lib.handleLogin = (req,res)=>{
 }
 
 lib.storeTodo = function (req,res) {
+  debugger;
   let usrName = getUserName(req);
   let filePath = getFilePath(usrName);
-  let todoTitle = req.body.title;
-  let todoDescription = req.body.description;
+  let todoTitle = refineContents(req.body.title);
+  let todoDescription = refineContents(req.body.description);
   let todo = new Todo(todoTitle,todoDescription);
   let usrRepo = fromJson(User,fs.readFileSync(filePath));
   usrRepo.todoRepository = fromJson(TodoRepository,toJsonString(usrRepo.todoRepository));

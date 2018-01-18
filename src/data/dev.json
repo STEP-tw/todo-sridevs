@@ -1,10 +1,26 @@
 {
-  "id": 1,
   "name": "dev",
+  "id": 1,
   "todoRepository": {
-    "todos": {},
+    "todos": {
+      "1": {
+        "id": 1,
+        "title": "relaunch",
+        "description": "succesful+launch",
+        "status": "undone",
+        "tasks": []
+      }
+    },
     "deletedTodos": {},
     "completedTodos": {},
-    "liveTodos": {}
+    "liveTodos": {
+      "1": {
+        "id": 1,
+        "title": "relaunch",
+        "description": "succesful+launch",
+        "status": "undone",
+        "tasks": []
+      }
+    }
   }
 }

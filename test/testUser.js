@@ -7,7 +7,7 @@ var user;
 
 describe('User',function () {
   beforeEach(function () {
-    user = new User;
+    user = new User('sridev');
   })
 
   it('should contain a unique Id',function () {
@@ -15,7 +15,7 @@ describe('User',function () {
   })
 
   it('should contain name',function () {
-    assert.propertyVal(user,'name','');
+    assert.propertyVal(user,'name','sridev');
   })
 
   it('should contain a todo repository',function () {

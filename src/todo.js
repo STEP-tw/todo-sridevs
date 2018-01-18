@@ -2,7 +2,7 @@ const Item= require('./item.js').Item;
 
 class Todo extends Item {
   constructor(title,desc) {
-    super();
+    super(title,desc);
   }
     addTask(task) {
       this.tasks.push(task);
