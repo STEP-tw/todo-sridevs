@@ -16,12 +16,12 @@ describe('Crypter',function () {
   })
 
   it('should encrypt the given string',function () {
-    let actual = crypter.encrypt(decrypted,key);
+    let actual = crypter.encrypt(decrypted);
     assert.equal(actual,encrypted);
   })
 
   it('should decrypt a given code',function () {
-    let actual = crypter.decrypt(encrypted,key);
+    let actual = crypter.decrypt(encrypted);
     assert.equal(actual,decrypted);
   })
 })

@@ -15,13 +15,13 @@ class Crypter {
     this.key = key;
   }
 
-  encrypt(word,key) {
+  encrypt(word) {
     word = toReverseArray(word,'');
-    return word.map(toAscii).join(key);
+    return word.map(toAscii).join(this.key);
   }
 
-  decrypt(str,key) {
-    str = toReverseArray(str,key);
+  decrypt(str) {
+    str = toReverseArray(str,this.key);
     return str.map(fromAscii).join('');
   }
 }

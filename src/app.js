@@ -17,7 +17,7 @@ app.use(lib.logRequest);
 app.use(lib.loadUser);
 app.use(serveStaticFiles)
 app.get('/logout',lib.handleLogout);
-// app.get('/showTodo',displayTodo);
+app.get('/showTodo',lib.displayTodo);
 app.post('/',lib.handleLogin);
 app.post('/addTodo',lib.storeTodo);
 module.exports = app;

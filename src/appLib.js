@@ -6,6 +6,9 @@ let registered_users = require('./data/registeredUsers.js').registered_users;
 let Todo = require('./todo.js');
 let TodoRepository = require('./todoRepository.js').TodoRepository;
 let User = require('./user.js').User;
+let Crypter = new require('./crypter.js');
+let key = 'r@-';
+let crypter = new Crypter(key);
 
 let toJsonString = o=>JSON.stringify(o,null,2);
 
@@ -33,6 +36,17 @@ let setContentType = function (response,fileName) {
   response.setHeader('Content-Type',headers[fileType]);
 };
 
+let respondWithFile = function (res,fileName) {
+  let data = fs.readFileSync(fileName);
+  setContentType(res,fileName);
+  res.write(data);
+};
+
+let handleLoginFail = function (req,res) {
+  if(req.cookies.logInFailed && request.url == '/') {
+    res.write('<p>login Failed</p>');
+  }
+};
 
 let getFileName = function (request) {
   let fileName = request.url.substr(1);
@@ -44,12 +58,13 @@ let getFileName = function (request) {
 };
 
 let getUserName = function (req) {
+  debugger;
   return req.body.userName || req.cookies.userName;
 }
 
 let refineContents = function (contents) {
-  contents = contents.replace(/\+/g,' ');
-  refinedcontents = decodeURIComponent(contents);
+  content = contents.replace(/\+/g,' ');
+  refinedcontents = decodeURIComponent(content);
   return refinedcontents;
 };
 
@@ -61,15 +76,37 @@ let createTodo = function (req) {
 
 let fetchUserRepo = function (filePath) {
   let userRepo = fromJson(User,fs.readFileSync(filePath));
-  usrRepo.todoRepository = fromJson(TodoRepository,toJsonString(usrRepo.todoRepository));
+  userRepo.todoRepository = fromJson(TodoRepository,toJsonString(userRepo.todoRepository));
   return userRepo;
 };
 
 let addTodo = function (filePath,todo) {
+  debugger;
   let usrRepo = fetchUserRepo(filePath);
   usrRepo.addTodo(todo);
   fs.writeFile(filePath,toJsonString(usrRepo));
 }
+
+
+lib.storeTodo = function (req,res) {
+  debugger;
+  let usrName = crypter.decrypt(getUserName(req));
+  let filePath = getFilePath(usrName);
+  let todo = createTodo(req);
+  addTodo(filePath,todo);
+  res.redirect('/homePage.html');
+};
+
+lib.displayTodo = function (req,res) {
+  debugger;
+  let usrName = crypter.decrypt(getUserName(req));
+  let filePath = getFilePath(usrName);
+  let userRepo = fetchUserRepo(filePath);
+  let todos = toJsonString(userRepo.liveTodos);
+  setContentType(res,filePath);
+  res.write(todos);
+  res.end();
+};
 
 lib.isItData = function (fileName) {
   let validDataFiles = ['data/todoList.json'];
@@ -81,12 +118,8 @@ lib.handleRequests = function (request, response) {
   let fileName = getFileName(request);
   // Print the name of the file for which request is made.
   console.log("Request for " + fileName + " received.");
-  let data = fs.readFileSync(fileName);
-  setContentType(response,fileName);
-  response.write(data);
-  if(request.cookies.logInFailed && request.url == '/') {
-    response.write('<p>login Failed</p>');
-  }
+  respondWithFile(response,fileName);
+  handleLoginFail(request,response);
   response.end();
 }
 
@@ -101,6 +134,7 @@ let getFilePath = function (usrName) {
 }
 
 lib.handleLogin = (req,res)=>{
+  debugger;
   let usrName = getUserName(req);
   let userRepo = new User(usrName)
   let filePath = getFilePath(usrName);
@@ -112,29 +146,13 @@ lib.handleLogin = (req,res)=>{
   }
   let sessionid = new Date().getTime();
   res.setHeader('Set-Cookie',`sessionid=${sessionid}`);
-  res.setHeader('Set-Cookie',`userName=${usrName}`);
+  res.setHeader('Set-Cookie',`userName=${crypter.encrypt(usrName)}`);
   user.sessionid = sessionid;
   if (!fs.existsSync(filePath)) {
     fs.writeFile(filePath,toJsonString(userRepo));
   }
   res.redirect('/homePage.html');
 }
-
-lib.storeTodo = function (req,res) {
-  debugger;
-  let usrName = getUserName(req);
-  let filePath = getFilePath(usrName);
-  let todo = createTodo(req);
-  addTodo(filePath,todo);
-  res.redirect('/homePage.html');
-};
-
-lib.displayTodo = function (req,res) {
-  let usrName = getUserName(req);
-  let filePath = getFilePath(usrName);
-  let userRepo = fetchUserRepo(filePath);
-  let todos = userRepo.liveTodos;
-};
 
 lib.loadUser = (req,res)=>{
   let sessionid = req.cookies.sessionid;
