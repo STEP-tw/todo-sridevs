@@ -1,11 +1,11 @@
-const TodoRepository = require('./todoRepository');
+const TodoRepository = require('./todoRepository').TodoRepository;
 const Counter = require('./counter.js').Counter;
 const idGenerator = new Counter;
 class User {
-  constructor(name,todoRepository) {
-    this.id = idGenerator.increment();
+  constructor(id,name,todoRepository) {
+    this.id = id || idGenerator.increment();
     this.name = name || '';
-    this.todoRepository = todoRepository || {};
+    this.todoRepository = todoRepository || new TodoRepository;
   }
 
   addRepo(repo) {
@@ -14,6 +14,10 @@ class User {
 
   emptyRepo(repo) {
     return this.todoRepository = {};
+  }
+
+  addTodo(todo) {
+    return this.todoRepository.addTodo(todo);
   }
 }
 exports.User = User;

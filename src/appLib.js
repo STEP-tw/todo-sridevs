@@ -2,9 +2,16 @@ let fs = require('fs');
 let publicDir = process.env.PUBLICDIRPATH || './public/';
 let lib = {};
 let timeStamp = require('./time.js').timeStamp;
-let toS = o=>JSON.stringify(o,null,2);
 let registered_users = require('./data/registeredUsers.js').registered_users;
+let Todo = require('./todo.js');
+let TodoRepository = require('./todoRepository.js').TodoRepository;
+let User = require('./user.js').User;
 
+let toJsonString = o=>JSON.stringify(o,null,2);
+let fromJson =function (classObj,jsonObj) {
+  let obj = JSON.parse(jsonObj);
+  return obj = new classObj(...Object.values(obj));
+}
 let setContentType = function (response,fileName) {
   let headers = {
     js: 'text/javascript',
@@ -34,6 +41,10 @@ let getFileName = function (request) {
   }
 };
 
+let getUserName = function (req) {
+  return req.body.userName;
+}
+
 lib.isItData = function (fileName) {
   let validDataFiles = ['data/todoList.json'];
   return fileName.includes(validDataFiles);
@@ -54,33 +65,46 @@ lib.handleRequests = function (request, response) {
 }
 
 lib.handleLogout = (req,res)=>{
+  delete req.userName;
   res.setHeader('Set-Cookie',[`logInFailed=false;Expires=${new Date(1).toUTCString()}`]);
   res.redirect('/');
 }
 
+let getFilePath = function (usrName) {
+  return `./data/${usrName}.json`;
+}
+
 lib.handleLogin = (req,res)=>{
-  let user = registered_users.find(u=>u.userName==req.body.userName);
+  debugger;
+  let usrName = getUserName(req);
+  let userRepo = new User(usrName)
+  let filePath = getFilePath(usrName);
+  let user = registered_users.find(u=>u.userName==usrName);
   if(!user) {
-    res.setHeader('Set-Cookie',`logInFailed=true`);
+    res.setHeader('Set-Cookie','logInFailed=true');
     res.redirect('/');
     return;
   }
   let sessionid = new Date().getTime();
   res.setHeader('Set-Cookie',`sessionid=${sessionid}`);
+  // res.setHeader('Set-Cookie',``)
   user.sessionid = sessionid;
+  if (!fs.existsSync(filePath)) {
+    fs.writeFile(filePath,toJsonString(userRepo));
+  }
   res.redirect('/homePage.html');
 }
 
 lib.storeTodo = function (req,res) {
+  let usrName = getUserName(req);
+  let filePath = getFilePath(usrName);
   let todoTitle = req.body.title;
   let todoDescription = req.body.description;
-  let titleWithDesc = {
-    "title":todoTitle,
-    "description": todoDescription
-  };
-  let todoList = JSON.parse(fs.readFileSync("./data/todoList.json"));
-  todoList.push(titleWithDesc);
-  fs.writeFile("./data/todoList.json",JSON.stringify(todoList,null,2));
+  let todo = new Todo(todoTitle,todoDescription);
+  let usrRepo = fromJson(User,fs.readFileSync(filePath));
+  usrRepo.todoRepository = fromJson(TodoRepository,toJsonString(usrRepo.todoRepository));
+  usrRepo.addTodo(todo);
+  fs.writeFile(filePath,toJsonString(usrRepo));
   res.redirect('/homePage.html');
 };
 
@@ -96,9 +120,9 @@ lib.logRequest = (req,res)=>{
   let text = ['------------------------------',
     `${timeStamp()}`,
     `${req.method} ${req.url}`,
-    `HEADERS=> ${toS(req.headers)}`,
-    `COOKIES=> ${toS(req.cookies)}`,
-    `BODY=> ${toS(req.body)}`,''].join('\n');
+    `HEADERS=> ${toJsonString(req.headers)}`,
+    `COOKIES=> ${toJsonString(req.cookies)}`,
+    `BODY=> ${toJsonString(req.body)}`,''].join('\n');
   fs.appendFile('request.log',text,()=>{});
 
   console.log(`${req.method} ${req.url}`);

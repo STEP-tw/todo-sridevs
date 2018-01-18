@@ -71,7 +71,7 @@ describe('app',()=>{
       })
     })
   })
-  describe('login',()=>{
+  describe('Post login',()=>{
     it('redirects to homePage for valid user',done=>{
       request(app,{method:'POST',url:'/',body:'userName=dev'},res=>{
         th.should_be_redirected_to(res,'/homePage.html');

@@ -1,5 +1,6 @@
 const prefix= '../src/';
 const User = require(`${prefix}user.js`).User;
+const TodoRepository = require(`${prefix}todoRepository.js`).TodoRepository;
 const assert = require('chai').assert;
 
 var user;
@@ -18,7 +19,7 @@ describe('User',function () {
   })
 
   it('should contain a todo repository',function () {
-    assert.deepPropertyVal(user,'todoRepository',{});
+    assert.deepPropertyVal(user,'todoRepository',new TodoRepository);
   })
 
   describe('addRepo',function () {
@@ -35,6 +36,15 @@ describe('User',function () {
       user.addRepo(repo);
       user.emptyRepo();
       assert.deepEqual(user.todoRepository,{});
+    })
+  })
+
+  describe('addTodo',function () {
+    it('should be able to add a todo',function () {
+      let todo = {id: 1,hi: 'hello'};
+      user.addTodo(todo);
+      assert.deepNestedPropertyVal(user,'todoRepository.todos',{1: todo});
+      assert.deepNestedPropertyVal(user,'todoRepository.liveTodos',{1: todo});
     })
   })
 })
