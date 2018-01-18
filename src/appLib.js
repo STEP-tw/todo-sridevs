@@ -8,10 +8,12 @@ let TodoRepository = require('./todoRepository.js').TodoRepository;
 let User = require('./user.js').User;
 
 let toJsonString = o=>JSON.stringify(o,null,2);
+
 let fromJson =function (classObj,jsonObj) {
   let obj = JSON.parse(jsonObj);
   return obj = new classObj(...Object.values(obj));
 }
+
 let setContentType = function (response,fileName) {
   let headers = {
     js: 'text/javascript',
@@ -87,7 +89,7 @@ lib.handleLogin = (req,res)=>{
   }
   let sessionid = new Date().getTime();
   res.setHeader('Set-Cookie',`sessionid=${sessionid}`);
-  // res.setHeader('Set-Cookie',``)
+  res.setHeader('Set-Cookie',`userName=${usrName}`);
   user.sessionid = sessionid;
   if (!fs.existsSync(filePath)) {
     fs.writeFile(filePath,toJsonString(userRepo));
