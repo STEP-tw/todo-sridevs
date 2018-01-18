@@ -47,4 +47,12 @@ describe('User',function () {
       assert.deepNestedPropertyVal(user,'todoRepository.liveTodos',{1: todo});
     })
   })
+
+  describe('liveTodos',function () {
+    it('should show the current todos',function () {
+      let todo = {id: 1,hi: 'hello'};
+      user.addTodo(todo);
+      assert.deepEqual(user.liveTodos, user.todoRepository.liveTodos);
+    })
+  })
 })

@@ -1,4 +1,4 @@
-let url = 'data/todoList.json'
+let url = 'showTodo';
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
   if (this.readyState < 4) {

@@ -53,6 +53,24 @@ let refineContents = function (contents) {
   return refinedcontents;
 };
 
+let createTodo = function (req) {
+  let todoTitle = refineContents(req.body.title);
+  let todoDescription = refineContents(req.body.description);
+  return new Todo(todoTitle,todoDescription);
+};
+
+let fetchUserRepo = function (filePath) {
+  let userRepo = fromJson(User,fs.readFileSync(filePath));
+  usrRepo.todoRepository = fromJson(TodoRepository,toJsonString(usrRepo.todoRepository));
+  return userRepo;
+};
+
+let addTodo = function (filePath,todo) {
+  let usrRepo = fetchUserRepo(filePath);
+  usrRepo.addTodo(todo);
+  fs.writeFile(filePath,toJsonString(usrRepo));
+}
+
 lib.isItData = function (fileName) {
   let validDataFiles = ['data/todoList.json'];
   return fileName.includes(validDataFiles);
@@ -106,14 +124,16 @@ lib.storeTodo = function (req,res) {
   debugger;
   let usrName = getUserName(req);
   let filePath = getFilePath(usrName);
-  let todoTitle = refineContents(req.body.title);
-  let todoDescription = refineContents(req.body.description);
-  let todo = new Todo(todoTitle,todoDescription);
-  let usrRepo = fromJson(User,fs.readFileSync(filePath));
-  usrRepo.todoRepository = fromJson(TodoRepository,toJsonString(usrRepo.todoRepository));
-  usrRepo.addTodo(todo);
-  fs.writeFile(filePath,toJsonString(usrRepo));
+  let todo = createTodo(req);
+  addTodo(filePath,todo);
   res.redirect('/homePage.html');
+};
+
+lib.displayTodo = function (req,res) {
+  let usrName = getUserName(req);
+  let filePath = getFilePath(usrName);
+  let userRepo = fetchUserRepo(filePath);
+  let todos = userRepo.liveTodos;
 };
 
 lib.loadUser = (req,res)=>{

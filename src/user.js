@@ -19,5 +19,9 @@ class User {
   addTodo(todo) {
     return this.todoRepository.addTodo(todo);
   }
+
+  get liveTodos() {
+    return this.todoRepository.liveTodos;
+  }
 }
 exports.User = User;
